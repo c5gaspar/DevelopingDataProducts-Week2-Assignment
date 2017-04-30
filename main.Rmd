@@ -1,0 +1,26 @@
+# Visualisation of Toronto's Road Traffic Cameras
+#### Author: Connor Gaspar
+#### Date: `r format(Sys.Date(), "%d %b %Y")`
+
+***
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, include=FALSE)
+require(knitr); require(leaflet); require(tools)
+```
+
+```{r initialize}
+url <- 'http://opendata.toronto.ca/transportation/tmc/rescucameraimages/Data/tmcearthcameras.csv'
+camDat <- read.csv(url, stringsAsFactors=F)
+```
+
+```{r mapping, echo=FALSE, include=TRUE}
+camDat %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(clusterOptions = markerClusterOptions())
+```
+
+***
+
+Data graciously provided by the City of Toronto's open data initiative
